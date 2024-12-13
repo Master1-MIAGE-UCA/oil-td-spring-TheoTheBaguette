@@ -18,7 +18,7 @@ public class DiceRollLog {
 
     private LocalDateTime timestamp;
 
-    // Getters and Setters (peut être simplifié avec Lombok)
+
 
     public Long getId() {
         return id;
