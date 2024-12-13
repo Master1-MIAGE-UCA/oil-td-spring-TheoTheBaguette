@@ -2,40 +2,95 @@
 
 # Projet "Dice" - Gestion de lancés de dés avec Spring Boot
 
-
-## Expliaction des étapes réalisées
-
+## Explication des étapes réalisées
 
 ### 1. Création du projet Spring Boot
 - Utilisation de Spring Initializr pour générer un projet Maven avec les dépendances : Spring Web, Spring Data JPA, H2 Database.
 - Configuration du port à 8081 dans `application.properties`.
 
+---
+
 ### 2. Création de la classe `Dice`
 - Classe permettant de simuler un lancé de dé.
 
+---
+
 ### 3. Modélisation de l'entité `DiceRollLog`
-- Entité JPA avec les champs : nombre de dés, résultats, horodatage.
+- Entité JPA avec les champs :
+  - **Nombre de dés** : Nombre de dés lancés.
+  - **Résultats** : Liste des valeurs obtenues.
+  - **Horodatage** : Moment du lancé.
+
+---
 
 ### 4. Implémentation du Repository `DiceRollLogRepository`
-- Interface héritant de JpaRepository pour gérer les enregistrements en base de données.
+- Interface héritant de `JpaRepository` pour gérer les enregistrements en base de données.
+
+---
 
 ### 5. Création du service `DiceService`
-- Logique métier pour lancer des dés et enregistrer les résultats dans l'historique.
+- Logique métier pour :
+  - Lancer des dés.
+  - Enregistrer les résultats dans l'historique.
+
+---
 
 ### 6. Création des contrôleurs REST
+
 #### Contrôleur pour les lancés de dés (`DiceController`)
-- `GET /api/rollDice` : Lancer un seul dé.
-- `GET /api/rollDices/{X}` : Lancer X dés.
+- **`GET /api/rollDice`** : Lancer un seul dé.
+- **`GET /api/rollDices/{X}`** : Lancer X dés (remplacez `{X}` par un nombre).
 
 #### Contrôleur pour l'historique (`HistoryController`)
-- `GET /api/diceLogs` : Consulter l'historique des lancés.
+- **`GET /api/diceLogs`** : Consulter l'historique des lancés.
+
+---
+
+## Bonus
+
+### 7. Swagger - Documentation interactive des API
+- Ajout de la dépendance `springdoc-openapi-starter-webmvc-ui` pour intégrer Swagger.
+- Tous les endpoints sont documentés automatiquement.
+- Accès à la documentation Swagger via l'interface web à l'URL :  
+  **[http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)**
+
+---
+
+### 8. Lombok - Simplification du code
+- Ajout de la dépendance Lombok pour réduire le code boilerplate.
+- Utilisation des annotations suivantes :
+  - **`@Data`** : Génère automatiquement les getters, setters, `toString`, et autres méthodes utiles.
+  - **`@NoArgsConstructor`** et **`@AllArgsConstructor`** : Génèrent des constructeurs sans et avec arguments.
+- Exemple d'optimisation avec Lombok sur l'entité `DiceRollLog` :
+  ```java
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @Entity
+  public class DiceRollLog {
+      @Id
+      @GeneratedValue(strategy = GenerationType.IDENTITY)
+      private Long id;
+
+      private int diceCount;
+
+      @ElementCollection
+      private List<Integer> results;
+
+      private LocalDateTime timestamp;
+  }
+  ```
 
 ---
 
 ## URLs à utiliser
+
 - **Lancer un dé** : `http://localhost:8081/api/rollDice`
 - **Lancer plusieurs dés** : `http://localhost:8081/api/rollDices/{X}` (remplacez `{X}` par un nombre).
 - **Consulter l'historique** : `http://localhost:8081/api/diceLogs`
+- **Documentation Swagger** : `http://localhost:8081/swagger-ui.html`
+
+---
 
 
 
