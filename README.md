@@ -1,5 +1,45 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/QGf4F8_h)
+
 # Projet "Dice" - Gestion de lancés de dés avec Spring Boot
+
+
+## Expliaction des étapes réalisées
+
+
+### 1. Création du projet Spring Boot
+- Utilisation de Spring Initializr pour générer un projet Maven avec les dépendances : Spring Web, Spring Data JPA, H2 Database.
+- Configuration du port à 8081 dans `application.properties`.
+
+### 2. Création de la classe `Dice`
+- Classe permettant de simuler un lancé de dé.
+
+### 3. Modélisation de l'entité `DiceRollLog`
+- Entité JPA avec les champs : nombre de dés, résultats, horodatage.
+
+### 4. Implémentation du Repository `DiceRollLogRepository`
+- Interface héritant de JpaRepository pour gérer les enregistrements en base de données.
+
+### 5. Création du service `DiceService`
+- Logique métier pour lancer des dés et enregistrer les résultats dans l'historique.
+
+### 6. Création des contrôleurs REST
+#### Contrôleur pour les lancés de dés (`DiceController`)
+- `GET /api/rollDice` : Lancer un seul dé.
+- `GET /api/rollDices/{X}` : Lancer X dés.
+
+#### Contrôleur pour l'historique (`HistoryController`)
+- `GET /api/diceLogs` : Consulter l'historique des lancés.
+
+---
+
+## URLs à utiliser
+- **Lancer un dé** : `http://localhost:8081/api/rollDice`
+- **Lancer plusieurs dés** : `http://localhost:8081/api/rollDices/{X}` (remplacez `{X}` par un nombre).
+- **Consulter l'historique** : `http://localhost:8081/api/diceLogs`
+
+
+
+# ---------------------------------------------------------------------------------------------------------------------
 
 ## Description
 Le projet "Dice" est une application construite avec Spring Boot permettant de simuler des lancés de dés et de gérer un historique des résultats en base de données. Ce projet met en œuvre les concepts fondamentaux de Spring Boot, notamment l'injection de dépendances, les services RESTful, les entités JPA et les repositories.
